@@ -1,9 +1,9 @@
 function [varargout] = noise(n_e, T_e, V_bias, varargin)
-%NOISE Compute and plot the output voltage spectral densities of all the
+%EO.NOISE Compute and plot the output voltage spectral densities of all the
 %noise components in the small signal integrated noise model, together with
 %the impedance of the QTN antenna model (Z_A), the IU-curve and the
 %associated resistances (R_s, R_ph).
-%   noise(n_e, T_e, V_bias) computes and plots as described above with the
+%   eo.noise(n_e, T_e, V_bias) computes and plots as described above with the
 %   electron density n_e [cm^-3] and temperature T_e [eV], plus a bias
 %   potential of V_bias [V].
 
@@ -14,19 +14,19 @@ e = 1.602*10^(-19);
 
 % Settings
 V_B = (-250:0.001:100)';
-f = f_sample(0.01, 10, 1) + 0.004;     % f/f_p
-f_p = plasmafreq(n_e);
+f = eo.f_sample(0.01, 10, 1) + 0.004;     % f/f_p
+f_p = eo.plasmafreq(n_e);
 L = 6;
-L_Dm = debye(n_e, T_e);
+L_Dm = eo.debye(n_e, T_e);
 
 %--------------------------------------------------------------------------
 % Quasi-thermal noise and antenna impedance
-[V2_qtn, Z] = qtnmod(n_e, T_e, f);
+[V2_qtn, Z] = eo.qtnmod(n_e, T_e, f);
 V_qtn = sqrt(V2_qtn);
 
 % Probe resistance and currents due to ambient plasma particles
 % Electron current
-I_E = oml(n_e, T_e, 0.01);
+I_E = eo.oml(n_e, T_e, 0.01);
 % Ion Current
 if (nargin >= 4)
     m_i = cell2mat(varargin(1));
@@ -35,7 +35,7 @@ if (nargin >= 4)
     else
         v_Di = 0.01;
     end
-    I_I = oml(n_e, T_e, v_Di, 1, m_i);
+    I_I = eo.oml(n_e, T_e, v_Di, 1, m_i);
 else
     I_I =zeros(length(V_B), 1);
 end
@@ -55,7 +55,7 @@ R_s = 2*1./(ppval(Cond_S_pp, V_bias))*ones(length(Z), 1); % Serial connection
 
 % Photo-electron contributions
 % Photoelectron current
-I_PH = grard(V_B);
+I_PH = eo.grard(V_B);
 % Interpolate
 I_PH_pp = spline(V_B, I_PH);
 % Differentiate
@@ -77,14 +77,14 @@ V_s = sqrt(4*k_B*T_s*R_s);
 I2_shot_ph = 2*e*abs(I_ph);
 % I2_shot_s = 2*e*abs(I_s);
 I2_shot_s = 2*e*(abs(I_e) + abs(I_i));  % Assume uncorrelated ion and electron contributions
-Z_tot = parallell(R_s, parallell(R_ph, Z));
+Z_tot = eo.parallell(R_s, eo.parallell(R_ph, Z));
 
 % Output voltages
-V_out_qtn = voltage_division(V_qtn, Z, parallell(R_s, R_ph));
+V_out_qtn = eo.voltage_division(V_qtn, Z, eo.parallell(R_s, R_ph));
 V2_out_qtn = V_out_qtn.*conj(V_out_qtn);
-V_out_ph = voltage_division(V_ph, R_ph, parallell(R_s, Z));
+V_out_ph = eo.voltage_division(V_ph, R_ph, eo.parallell(R_s, Z));
 V2_out_ph = V_out_ph.*conj(V_out_ph);
-V_out_s = voltage_division(V_s, R_s, parallell(R_ph, Z));
+V_out_s = eo.voltage_division(V_s, R_s, eo.parallell(R_ph, Z));
 V2_out_s = V_out_s.*conj(V_out_s);
 V2_out_shot_s = I2_shot_s.*Z_tot.*conj(Z_tot);
 V2_out_shot_ph = I2_shot_ph.*Z_tot.*conj(Z_tot);

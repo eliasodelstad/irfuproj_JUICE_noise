@@ -1,6 +1,6 @@
 function [Z_p] = parallell(Z1, Z2)
-%PARALLELL Compute impedance of parallel coupling
-%   PARALLELL(Z1, Z2) computes the equivalent impedance of the parallel
+%EO.PARALLELL Compute impedance of parallel coupling
+%   eo.parallell(Z1, Z2) computes the equivalent impedance of the parallel
 %   coupling of impedances Z1 and Z2. If one of Z1 and Z2 is inf, the one
 %   which is not inf is returned. If both are inf, then inf is returned. If
 %   one or both are zero, zero is returned. The calculation is done

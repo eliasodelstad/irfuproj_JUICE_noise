@@ -1,6 +1,6 @@
 function [varargout] = qtnmod(n_e, T_e, varargin)
-%qtnmod Compute quasi-thermal noise and associated antenna impedance for kappa-distributed electrons.
-%   qtnmod(n_e, T_e) computes the quasi-thermal noise in a double-sphere 
+%EO.QTNMOD Compute quasi-thermal noise and associated antenna impedance for kappa-distributed electrons.
+%   eo.qtnmod(n_e, T_e) computes the quasi-thermal noise in a double-sphere 
 %   dipole antenna in a plasma where the electron velocities obey a "Kappa-
 %   distribution". n_e is the electron density in cm^-3 and T_e is the
 %   electron temperature in eV.
@@ -49,7 +49,7 @@ F = @(x) F_1(x).*F_a(x);
 if (nargin >= 3)
     f = cell2mat(varargin(1))*f_p;
 else
-    f = f_sample(0.1, 10, 1)*f_p;
+    f = eo.f_sample(0.1, 10, 1)*f_p;
 end
 w = 2*pi*f;
 

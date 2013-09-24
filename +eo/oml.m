@@ -1,6 +1,6 @@
 function [varargout] = oml(n_j, T_j, v_Dj, varargin)
-%OML Computes current from spherical Langmuir probe due to single particle species under OML approximation.
-%   OML(n_j, T_j, v_Dj, {q_j, m_j, V_B, r_p}) computes and plots the particle
+%EO.OML Computes current from spherical Langmuir probe due to single particle species under OML approximation.
+%   eo.oml(n_j, T_j, v_Dj, {q_j, m_j, V_B, r_p}) computes and plots the particle
 %   current from given plasma parameters (from equations (7.16) - (7.21) in
 %   H?ymork et al) particle density n_j, temperature T_j, drift velocity
 %   v_Dj, charge q_j, mass m_j and probe radius r_p at bias voltage points

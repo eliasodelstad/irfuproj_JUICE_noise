@@ -1,7 +1,7 @@
 function [varargout] = grard(varargin)
-%GRARD Computes photoelectron current vs voltage using expression in Grard
+%EO.GRARD Computes photoelectron current vs voltage using expression in Grard
 %(1973).
-%   grard(V, V_p, J_ao, R, A) computes the photoelectron current as
+%   eo.grard(V, V_p, J_ao, R, A) computes the photoelectron current as
 %   predicted by Grard (1973) for a spherical probe at the voltage points 
 %   contained in vector V, for photoelectron e-folding energy V_p, saturated
 %   current density J_ao (A/m^2 at 1 AU, material property), distance from the sun R (AU) 

@@ -1,5 +1,5 @@
 function [f_p] = plasmafreq(n_e)
-%PLASMAFREQ Compute the plasma frequency (in Hertz) from n_e.
+%EO.PLASMAFREQ Compute the plasma frequency (in Hertz) from n_e.
 
 %--------------------------------------------------------------------------
 % Physical constants

@@ -4,16 +4,16 @@
 % the legend string formatting. For long antennas this should be replaced
 % by '%1.0g'.
 
-f = f_sample(0.1, 10, 1);
+f = eo.f_sample(0.1, 10, 1);
 n_e = 10.^(4:0.5:5);
-f_p = plasmafreq(n_e);
+f_p = eo.plasmafreq(n_e);
 T_e = 1;
 V2 = zeros(length(f), length(n_e));
 Z = V2;
 S = cell(1, length(n_e));
 for i = 1:length(n_e);
-    [V2(:,i), Z(:,i)] = qtnmod(n_e(i), T_e, f);
-    S(i) = {['10$$^{' num2str(log10(n_e(i))) '}$$ eV ($$L/\lambda_{D_m}$$ = ' num2str(6/debye(n_e(i), T_e), '%1.1f') ')']};
+    [V2(:,i), Z(:,i)] = eo.qtnmod(n_e(i), T_e, f);
+    S(i) = {['10$$^{' num2str(log10(n_e(i))) '}$$ eV ($$L/\lambda_{D_m}$$ = ' num2str(6/eo.debye(n_e(i), T_e), '%1.1f') ')']};
 end
 
 figure('Position', [0 450 640 480])

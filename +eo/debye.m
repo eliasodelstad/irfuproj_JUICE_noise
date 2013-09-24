@@ -1,5 +1,5 @@
 function [lambda_D] = debye(n_e, T_e)
-%DEBYE Compute the Debye length (in meters) from n_e and T_e.
+%EO.DEBYE Compute the Debye length (in meters) from n_e and T_e.
 
 %--------------------------------------------------------------------------
 % Physical constants
